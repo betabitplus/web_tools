@@ -1,0 +1,15 @@
+{
+  "found": true,
+  "match_count": 1,
+  "matches": [
+    {
+      "bbox_count": 10,
+      "image_mode": "RGB",
+      "image_size": [
+        1280,
+        1024
+      ],
+      "text": "The Plimpton 322 tablet records Pythagorean triples from Babylonian times."
+    }
+  ]
+}

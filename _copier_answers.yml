@@ -1,0 +1,44 @@
+_commit: v0.24.0
+_src_path: https://github.com/betabitplus/py-lib-starter.git
+author_email: 8123085+betabitplus@users.noreply.github.com
+author_name: betabitplus
+ci_playwright_browsers:
+  - chromium
+config_class_name: WebToolsConfig
+copyright_year: '2026'
+e2e_slices:
+  - name: public-boundary
+    path: tests/__PACKAGE_NAME__/e2e/public_boundary
+  - name: examples
+    path: tests/__PACKAGE_NAME__/e2e/examples
+  - name: fetch-cache-and-page-artifacts
+    path: tests/__PACKAGE_NAME__/e2e/fetch_cache_and_page_artifacts
+  - name: html-conversion-and-visual-manifest
+    path: tests/__PACKAGE_NAME__/e2e/html_conversion_and_visual_manifest
+  - name: media-extraction-and-download-policy
+    path: tests/__PACKAGE_NAME__/e2e/media_extraction_and_download_policy
+  - name: public-output-and-errors
+    path: tests/__PACKAGE_NAME__/e2e/public_output_and_errors
+  - name: quote-text-and-elements
+    path: tests/__PACKAGE_NAME__/e2e/quote_text_and_elements
+env_file_default: $HOME/researcher-local/.env
+env_prefix: WEB_TOOLS
+error_class_name: WebToolsError
+github_owner: betabitplus
+gitignore_extra_patterns: []
+initial_version: 0.2.0
+library_lane: standard-lib
+package_name: web_tools
+project_description: Standalone web content fetching, conversion, and quoting tools.
+project_name: web-tools
+project_slug: web-tools
+project_title: Web Tools
+project_title_lower: web tools
+renovate_uv_ignored_updates: []
+repository_name: web_tools
+runtime_git_ref: v0.24.0
+runtime_git_subdirectory: packages/py-lib-runtime
+runtime_git_url: https://github.com/betabitplus/py-lib-starter.git
+tooling_git_ref: v0.24.0
+tooling_git_subdirectory: packages/py-lib-tooling
+tooling_git_url: https://github.com/betabitplus/py-lib-starter.git

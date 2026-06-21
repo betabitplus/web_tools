@@ -1,0 +1,15 @@
+{
+  "found": true,
+  "match_count": 1,
+  "matches": [
+    {
+      "bbox_count": 20,
+      "image_mode": "RGB",
+      "image_size": [
+        1280,
+        1024
+      ],
+      "text": "The theorem can be written as an equation relating the lengths of the sides a, b and the hypotenuse c"
+    }
+  ]
+}

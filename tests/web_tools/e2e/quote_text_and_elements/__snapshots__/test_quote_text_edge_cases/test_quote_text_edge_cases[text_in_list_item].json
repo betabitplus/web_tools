@@ -1,0 +1,15 @@
+{
+  "found": true,
+  "match_count": 1,
+  "matches": [
+    {
+      "bbox_count": 12,
+      "image_mode": "RGB",
+      "image_size": [
+        1280,
+        1024
+      ],
+      "text": "The area of a triangle is half the area of any parallelogram"
+    }
+  ]
+}

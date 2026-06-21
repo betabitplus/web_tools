@@ -1,0 +1,17 @@
+{
+  "bbox_has_positive_size": true,
+  "bbox_keys": [
+    "height",
+    "width",
+    "x",
+    "y"
+  ],
+  "element_type": "picture",
+  "found": true,
+  "id": "P_5",
+  "image_mode": "RGB",
+  "image_size": [
+    1280,
+    1024
+  ]
+}

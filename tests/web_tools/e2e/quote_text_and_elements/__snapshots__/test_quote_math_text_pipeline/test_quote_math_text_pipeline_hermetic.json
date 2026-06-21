@@ -1,0 +1,15 @@
+{
+  "found": true,
+  "match_count": 1,
+  "matches": [
+    {
+      "bbox_count": 16,
+      "image_mode": "RGB",
+      "image_size": [
+        1280,
+        1024
+      ],
+      "text": "And likewise, at all moments in time, the area is always _a_ 2 \\+ _b_ 2"
+    }
+  ]
+}
