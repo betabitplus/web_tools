@@ -11,7 +11,3 @@ What belongs here:
 What does not belong here:
     Do not mix project-specific helpers into shared tooling support.
 """
-
-from py_lib_tooling import load_repo_env_file
-
-load_repo_env_file()

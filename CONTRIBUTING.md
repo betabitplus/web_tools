@@ -11,9 +11,8 @@ for verification guidance.
 
 Repository-wide package and reusable-zone checks read metadata from
 `[tool.py_lib_starter]` in `pyproject.toml`. When repo-local scripts or shared
-test support need package names, env-var prefixes, or the optional env-file
-default, use
-`py_lib_tooling.get_project_tooling_config` instead of hardcoding package names.
+test support need package names or env-var prefixes, use
+`py_lib_tooling.get_project_tooling_config` instead of hardcoding them.
 
 `py-lib-runtime` is consumed as a runtime dependency and `py-lib-tooling` is
 consumed as a dev dependency from the shared py starter repository through

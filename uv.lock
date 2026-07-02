@@ -2403,16 +2403,16 @@ wheels = [
 
 [[package]]
 name = "py-lib-runtime"
-version = "0.10.3"
-source = { git = "https://github.com/betabitplus/py-lib-starter.git?subdirectory=packages%2Fpy-lib-runtime&rev=v0.28.11#7edb522184c5de3d28b75af36b1402b8e164387a" }
+version = "0.11.0"
+source = { git = "https://github.com/betabitplus/py-lib-starter.git?subdirectory=packages%2Fpy-lib-runtime&rev=v0.28.23#50406ce7c7fef82833aef15e9eb25072378bfbd0" }
 dependencies = [
     { name = "structlog" },
 ]
 
 [[package]]
 name = "py-lib-tooling"
-version = "0.26.10"
-source = { git = "https://github.com/betabitplus/py-lib-starter.git?subdirectory=packages%2Fpy-lib-tooling&rev=v0.28.11#7edb522184c5de3d28b75af36b1402b8e164387a" }
+version = "0.26.21"
+source = { git = "https://github.com/betabitplus/py-lib-starter.git?subdirectory=packages%2Fpy-lib-tooling&rev=v0.28.23#50406ce7c7fef82833aef15e9eb25072378bfbd0" }
 dependencies = [
     { name = "copier" },
     { name = "ipython" },
@@ -3725,7 +3725,7 @@ requires-dist = [
     { name = "markdown", specifier = ">=3.8" },
     { name = "pillow" },
     { name = "playwright", specifier = ">=1.60.0" },
-    { name = "py-lib-runtime", git = "https://github.com/betabitplus/py-lib-starter.git?subdirectory=packages%2Fpy-lib-runtime&rev=v0.28.11" },
+    { name = "py-lib-runtime", git = "https://github.com/betabitplus/py-lib-starter.git?subdirectory=packages%2Fpy-lib-runtime&rev=v0.28.23" },
     { name = "readability-lxml", specifier = ">=0.8" },
     { name = "tenacity", specifier = ">=9.1.4" },
 ]
@@ -3749,7 +3749,7 @@ dev = [
     { name = "pillow", specifier = ">=12.2" },
     { name = "pip-audit", specifier = ">=2.10.1" },
     { name = "pre-commit", specifier = ">=4.6.0" },
-    { name = "py-lib-tooling", git = "https://github.com/betabitplus/py-lib-starter.git?subdirectory=packages%2Fpy-lib-tooling&rev=v0.28.11" },
+    { name = "py-lib-tooling", git = "https://github.com/betabitplus/py-lib-starter.git?subdirectory=packages%2Fpy-lib-tooling&rev=v0.28.23" },
     { name = "pyright", specifier = ">=1.1.410" },
     { name = "pytest", specifier = ">=9.1.0" },
     { name = "pytest-asyncio", specifier = ">=1.4.0" },

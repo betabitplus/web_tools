@@ -6,6 +6,8 @@
 name: Sync Starter Template
 
 on:
+  push:
+    branches: [dev]
   repository_dispatch:
     types: [py-lib-starter-release]
   workflow_dispatch:
@@ -30,6 +32,7 @@ env:
 jobs:
   sync:
     name: Sync starter template
+    if: github.event_name != 'push'
     runs-on: ${{ github.event.repository.private == true && fromJSON(vars.CI_RUNNER_LABELS_JSON || '["ubuntu-latest"]') || 'ubuntu-latest' }}
 
     permissions:
@@ -137,7 +140,7 @@ jobs:
           echo "starter_ref=${starter_ref:-latest}" >> "$GITHUB_OUTPUT"
           echo "sync_label=${sync_label}" >> "$GITHUB_OUTPUT"
 
-          tooling_source="py-lib-tooling @ git+https://github.com/betabitplus/py-lib-starter.git@${starter_ref:-v0.28.11}#subdirectory=packages/py-lib-tooling"
+          tooling_source="py-lib-tooling @ git+https://github.com/betabitplus/py-lib-starter.git@${starter_ref:-v0.28.23}#subdirectory=packages/py-lib-tooling"
 
           run_tooling_command() {
             local command_name="$1"
@@ -194,6 +197,12 @@ jobs:
 
           auth_header="$(printf 'x-access-token:%s' "${SYNC_WRITE_TOKEN}" | base64 | tr -d '\n')"
           printf '::add-mask::%s\n' "${auth_header}"
+          while IFS= read -r key; do
+            git config --local --unset-all "${key}" || true
+          done < <(git config --local --name-only --get-regexp '^http\..*\.extraheader$' || true)
+          while IFS= read -r key; do
+            git config --local --unset-all "${key}" || true
+          done < <(git config --local --name-only --get-regexp '^includeIf\..*\.path$' || true)
           export GIT_CONFIG_COUNT=1
           export GIT_CONFIG_KEY_0=http.https://github.com/.extraheader
           export GIT_CONFIG_VALUE_0="AUTHORIZATION: basic ${auth_header}"
