@@ -90,11 +90,21 @@ jobs:
           export GIT_CONFIG_COUNT=1
           export GIT_CONFIG_KEY_0=http.https://github.com/.extraheader
           export GIT_CONFIG_VALUE_0="AUTHORIZATION: basic ${auth_header}"
+          read_shared_repository() {
+            local repository="$1"
+            git ls-remote "https://github.com/${repository}.git" HEAD >/dev/null 2>&1
+          }
           for repository in "${GITHUB_REPOSITORY}" "betabitplus/py-lib-starter"; do
-            if ! git ls-remote "https://github.com/${repository}.git" HEAD >/dev/null 2>&1; then
-              echo "::error::The betabitplus-py-lib-automation GitHub App cannot read ${repository}. Install or re-authorize the App for that repository before dependency installation."
-              exit 1
-            fi
+            for attempt in 1 2 3 4 5; do
+              if read_shared_repository "${repository}"; then
+                continue 2
+              fi
+              if [ "${attempt}" -lt 5 ]; then
+                sleep 10
+              fi
+            done
+            echo "::error::The betabitplus-py-lib-automation GitHub App cannot read ${repository}. Install or re-authorize the App for that repository before dependency installation."
+            exit 1
           done
 
       - name: Install dependencies (dev)
