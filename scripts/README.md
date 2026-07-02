@@ -10,8 +10,7 @@ scripts.
 metadata in `[tool.py_lib_starter]` in `pyproject.toml`.
 
 - Use it when behavior depends on the distribution name, the primary package,
-  the package list, repo-scoped env vars, or the repo's optional env-file
-  default.
+  the package list, or the env var prefix.
 - Do not hardcode project package names in reusable checks, smokes, or shared
   test support; read them from `[tool.py_lib_starter]`.
 - When the template is rendered or updated for another library, keep
@@ -30,16 +29,13 @@ from py_lib_tooling import get_project_tooling_config
 project_config = get_project_tooling_config()
 package_name = project_config.primary_package
 package_names = project_config.package_names
-env_file_var = project_config.env_file_var
-env_file_default = project_config.env_file_default
 ```
 
 ## Local Scripts
 
 - `env/`
   Local contributor environment setup and health checks. `project_config.sh`
-  reads `[tool.py_lib_starter]` from `pyproject.toml` for `.envrc` and
-  `env/doctor.sh`.
+  reads `[tool.py_lib_starter]` from `pyproject.toml`.
 
 Use shared smoke commands directly:
 

@@ -21,7 +21,6 @@ e2e_slices:
     path: tests/__PACKAGE_NAME__/e2e/public_output_and_errors
   - name: quote-text-and-elements
     path: tests/__PACKAGE_NAME__/e2e/quote_text_and_elements
-env_file_default: $HOME/researcher-local/.env
 env_prefix: WEB_TOOLS
 error_class_name: WebToolsError
 github_owner: betabitplus

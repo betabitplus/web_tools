@@ -427,7 +427,6 @@ primary_package = "web_tools"
 package_names = [ "web_tools" ]
 library_lane = "standard-lib"
 env_prefix = "WEB_TOOLS"
-env_file_default = "$HOME/researcher-local/.env"
 
 # ---------------- Pip Audit (dependency vulnerability scanning) ----------------
 [tool.pip-audit]

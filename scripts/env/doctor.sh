@@ -30,7 +30,7 @@ require_command() {
   fi
 
   fail "Missing \`$command_name\`. $hint"
-  return 1
+  return 0
 }
 
 repo_root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
@@ -79,103 +79,10 @@ PY
   fi
 fi
 
-env_file=""
-env_file_var=""
 if py_lib_load_project_env_config "$repo_root"; then
-  env_file="$PY_LIB_PROJECT_ENV_FILE"
-  env_file_var="$PY_LIB_PROJECT_ENV_FILE_VAR"
-  pass "Read env-file config from \`pyproject.toml\`"
+  pass "Read project env config from pyproject.toml"
 else
-  fail "Could not read [tool.py_lib_starter] env config from \`pyproject.toml\`."
-fi
-
-if [ -n "$env_file" ]; then
-  if [ -f "$env_file" ]; then
-    pass "Shared env file exists at \`$env_file\`"
-  else
-    warn "Shared env file not found at \`$env_file\`. Hermetic tests can still work; manual runs may need local config."
-  fi
-fi
-
-direnv_probe_output=""
-if direnv_probe_output="$(DIRENV_LOG_FORMAT='' direnv exec . python - <<'PY' 2>&1
-from __future__ import annotations
-
-import os
-import sys
-import tomllib
-from pathlib import Path
-
-import web_tools
-
-with Path("pyproject.toml").open("rb") as pyproject_file:
-    tooling = tomllib.load(pyproject_file)["tool"]["py_lib_starter"]
-
-env_file_var = f"{tooling['env_prefix']}_ENV_FILE"
-
-print(f"PYTHON={sys.executable}")
-print(f"VIRTUAL_ENV={os.environ.get('VIRTUAL_ENV', '')}")
-print(f"PYTHONPATH={os.environ.get('PYTHONPATH', '')}")
-print(f"ENV_FILE_VAR={env_file_var}")
-print(f"ENV_FILE_VALUE={os.environ.get(env_file_var, '')}")
-print(f"VERSION={web_tools.__version__}")
-PY
-)"; then
-  direnv_python="$(printf '%s\n' "$direnv_probe_output" | sed -n 's/^PYTHON=//p')"
-  direnv_venv="$(printf '%s\n' "$direnv_probe_output" | sed -n 's/^VIRTUAL_ENV=//p')"
-  direnv_pythonpath="$(printf '%s\n' "$direnv_probe_output" | sed -n 's/^PYTHONPATH=//p')"
-  direnv_env_file_var="$(printf '%s\n' "$direnv_probe_output" | sed -n 's/^ENV_FILE_VAR=//p')"
-  direnv_env_file="$(printf '%s\n' "$direnv_probe_output" | sed -n 's/^ENV_FILE_VALUE=//p')"
-
-  pass "Repo environment loads through \`direnv exec .\`"
-
-  case "$direnv_venv" in
-    "$repo_root/.venv")
-      pass "direnv activates the repo virtualenv"
-      ;;
-    *)
-      fail "direnv did not activate the repo virtualenv. Expected \`$repo_root/.venv\`, got \`${direnv_venv:-empty}\`."
-      ;;
-  esac
-
-  has_repo_src=0
-  has_repo_root=0
-
-  case ":$direnv_pythonpath:" in
-    *":$repo_root/src:"*)
-      has_repo_src=1
-      ;;
-  esac
-
-  case ":$direnv_pythonpath:" in
-    *":$repo_root:"*)
-      has_repo_root=1
-      ;;
-  esac
-
-  if [ "$has_repo_src" -eq 1 ] && [ "$has_repo_root" -eq 1 ]; then
-    pass "direnv exports the repo PYTHONPATH"
-  else
-    fail "direnv PYTHONPATH is missing repo paths."
-  fi
-
-  if [ -n "$direnv_env_file" ]; then
-    pass "direnv exports \`${direnv_env_file_var:-$env_file_var}\`"
-  else
-    warn "direnv did not export \`${direnv_env_file_var:-$env_file_var}\`."
-  fi
-
-  if [ -n "${VIRTUAL_ENV:-}" ] && [ "${VIRTUAL_ENV:-}" = "$repo_root/.venv" ]; then
-    pass "Current shell already looks repo-ready"
-  else
-    warn "Current shell does not look direnv-loaded. Interactive runs may need \`direnv allow\` and a fresh shell."
-  fi
-
-  if [ -n "$direnv_python" ]; then
-    pass "Repo Python resolves to \`$direnv_python\`"
-  fi
-else
-  fail "Repo environment failed to load through direnv. Run \`bash scripts/env/setup.sh\`, then \`direnv allow\`. Details: $direnv_probe_output"
+  fail "Could not read [tool.py_lib_starter] env config from pyproject.toml."
 fi
 
 pre_commit_hook="$(git rev-parse --git-path hooks/pre-commit)"

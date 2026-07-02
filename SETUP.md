@@ -8,9 +8,6 @@ workflow, tests, hooks, and release conventions, use
 
 - Python 3.13+
 - `uv` installed
-- optional local secrets/config file at the path configured by
-  `[tool.py_lib_starter].env_file_default`, or an override through the
-  repo-specific `*_ENV_FILE` variable
 
 ## First-Time Setup
 
